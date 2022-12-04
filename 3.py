@@ -25,11 +25,21 @@ currency_to_rub = {
     "UZS": 0.0055,
 }
 def csv_reader(name):
+    """
+
+    :param name: имя исходного файла
+    :return: возвращает, заголовки и данные
+    """
     csv_list = csv.reader(open(name, encoding='utf-8-sig'))
     data = [x for x in csv_list]
     return data[0], data[1::]
 
 def clean(text):
+    """
+    очищает строку
+    :param text: исходная строка
+    :return: очищенная строка
+    """
     example = re.compile(r'<[^>]+>')
     s = example.sub('', text).replace(' ', ' ').replace('\xa0', ' ').strip()
     return re.sub(" +", " ", s)
@@ -37,6 +47,11 @@ def clean(text):
 
 
 def csv_filer(reader):
+    """
+    Проверяет данные
+    :param reader: ридер csv файла
+    :return: возвращает структурированные данные
+    """
     all_vac = [x for x in reader if '' not in x and len(x) == len(reader[0])]
     vac = [[clean(y) for y in x] for x in all_vac]
     return vac
@@ -108,20 +123,42 @@ for key in salary_city:
     salary_city[key] = sum(salary_city[key]) // len(salary_city[key])
 
 class Table:
+    """
+    Класс который формирует html таблицу
+    """
     def __init__(self, width):
+        """
+
+        :param width: ширина таблицы
+        """
         self.width = width
         self.rows = []
         pass
 
     def add_row(self):
+        """
+        добавляет новую строку в таблицу
+        :return:
+        """
         self.rows.append([" "] * self.width)
 
     def set_value(self, row, column, value):
+        """
+        устанавливает значение в ячейку
+        :param row: номер строки
+        :param column: номер столбца
+        :param value: значение
+        :return:
+        """
         if row > len(self.rows):
             self.add_row()
         self.rows[row - 1][column - 1] = value
 
     def to_string(self):
+        """
+        формирует html таблицу
+        :return: таблица в формате html
+        """
         result = ""
         result += "<table>\n"
 
@@ -142,6 +179,12 @@ ws2 = Table(5)
 
 
 def set_cities(salaries, vacancies):
+    """
+        Устанавливает в таблицу все списки городов
+        :param salaries: список зарплат
+        :param vacancies: список вакансий
+        :return: ничего
+        """
     setCell(row=1, column=1, value="Город",bold=True, ws=ws2)
     setCell(row=1, column=2, value="Уровень зарплаты", ws=ws2,bold=True)
     setCell(row=1, column=4, value="Город", ws=ws2, bold=True)
@@ -158,10 +201,27 @@ def set_cities(salaries, vacancies):
         index+=1
 
 def setCell(row,column,value,ws, bold=False):
+    """
+    Устанавливает значение в таблицу применяя параметры
+    :param row: номер строки
+    :param column   номер столбца
+    :param value: значение ячейки
+    :param ws: ссылка на таблицу
+    :param bold: жирность текста
+    :return: ничего
+    """
     ws.set_value(row=row,column=column,value=value)
 
 
 def set_years(salary_dynamic, count_dynamic, salary_prof_dynamic , prof_count):
+    """
+    Устанавливает значение в таблицу применяя параметры
+    :param salary_dynamic: список зарплат
+    :param count_dynamic: список кол-ва
+    :param salary_prof_dynamic: список зарплат по професии
+    :param prof_count: список кол-ва по профессии
+    :return: ничего
+    """
     setCell(row=1,column=1,value="год",ws=ws1,bold=True)
     setCell(row=1,column=2,value="Средняя зарплата" ,ws=ws1,bold=True)
     setCell(row=1,column=3,value="Средняя зарплата " + prof ,ws=ws1,bold=True)
@@ -185,6 +245,12 @@ ax3 = axs[1,0]
 ax4 = axs[1,1]
 
 def set_ax4(most, total):
+    """
+    заполняет 4 график данными
+    :param most: значения по 10 городам
+    :param total: остальные города
+    :return:
+    """
     arr = []
     labels = []
     for key in most:
@@ -195,6 +261,11 @@ def set_ax4(most, total):
     ax4.set_title("Доля вакансий по городам")
 
 def set_ax3(salaries):
+    """
+
+    :param salaries: список зарплат
+    :return:
+    """
     arr = []
     labels = []
     for key in salaries:
@@ -205,6 +276,13 @@ def set_ax3(salaries):
     ax3.invert_yaxis()  # labels read top-to-bottom
 
 def set_ax1(salaries, prof_salaries, prof):
+    """
+
+    :param salaries: список зарплат
+    :param prof_salaries: список зарплат по профессии
+    :param prof: профессия
+    :return:
+    """
     x_axis = np.arange(len(salaries))
     years = []
     arr = []
@@ -221,6 +299,13 @@ def set_ax1(salaries, prof_salaries, prof):
     ax1.set_title("Уровень заплат по годам")
 
 def set_ax2(vacancies, prof_vacancies, prof):
+    """
+
+    :param vacancies: кол-во вакансий
+    :param prof_vacancies: кол-во вакансий по профессии
+    :param prof: профессия
+    :return:
+    """
     x_axis = np.arange(len(vacancies))
     years = []
     arr = []
@@ -236,6 +321,14 @@ def set_ax2(vacancies, prof_vacancies, prof):
     ax2.set_title("Количество вакансий по годам")
 
 def generate_pdf(img_path: str, prof: str, ws1 ,ws2 ):
+    """
+    генерирует пдф файл
+    :param img_path: имя файла
+    :param prof: профессия
+    :param ws1: таблица 1
+    :param ws2: иаблица 2
+    :return:
+    """
     env = Environment(loader=FileSystemLoader('.'))
     template = env.get_template("pdf_template.html")
     pdf_template = template.render({'prof': prof, 'img_path': img_path, 'ws1': ws1 , 'ws2':ws2})

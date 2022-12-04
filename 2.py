@@ -18,11 +18,21 @@ currency_to_rub = {
     "UZS": 0.0055,
 }
 def csv_reader(name):
+    """
+
+    :param name: имя исходного файла
+    :return: возвращает, заголовки и данные
+    """
     csv_list = csv.reader(open(name, encoding='utf-8-sig'))
     data = [x for x in csv_list]
     return data[0], data[1::]
 
 def clean(text):
+    """
+    очищает строку
+    :param text: исходная строка
+    :return: очищенная строка
+    """
     example = re.compile(r'<[^>]+>')
     s = example.sub('', text).replace(' ', ' ').replace('\xa0', ' ').strip()
     return re.sub(" +", " ", s)
@@ -30,6 +40,11 @@ def clean(text):
 
 
 def csv_filer(reader):
+    """
+    Проверяет данные
+    :param reader: ридер csv файла
+    :return: возвращает структурированные данные
+    """
     all_vac = [x for x in reader if '' not in x and len(x) == len(reader[0])]
     vac = [[clean(y) for y in x] for x in all_vac]
     return vac
@@ -102,6 +117,12 @@ ax3 = axs[1,0]
 ax4 = axs[1,1]
 
 def set_ax4(most, total):
+    """
+    заполняет 4 график данными
+    :param most: значения по 10 городам
+    :param total: остальные города
+    :return:
+    """
     arr = []
     labels = []
     for key in most:
@@ -112,6 +133,11 @@ def set_ax4(most, total):
     ax4.set_title("Доля вакансий по городам")
 
 def set_ax3(salaries):
+    """
+
+    :param salaries: список зарплат
+    :return:
+    """
     arr = []
     labels = []
     for key in salaries:
@@ -122,6 +148,13 @@ def set_ax3(salaries):
     ax3.invert_yaxis()  # labels read top-to-bottom
 
 def set_ax1(salaries, prof_salaries, prof):
+    """
+
+    :param salaries: список зарплат
+    :param prof_salaries: список зарплат по профессии
+    :param prof: профессия
+    :return:
+    """
     x_axis = np.arange(len(salaries))
     years = []
     arr = []
@@ -138,6 +171,13 @@ def set_ax1(salaries, prof_salaries, prof):
     ax1.set_title("Уровень заплат по годам")
 
 def set_ax2(vacancies, prof_vacancies, prof):
+    """
+
+    :param vacancies: кол-во вакансий
+    :param prof_vacancies: кол-во вакансий по профессии
+    :param prof: профессия
+    :return:
+    """
     x_axis = np.arange(len(vacancies))
     years = []
     arr = []

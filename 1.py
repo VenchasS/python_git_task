@@ -26,23 +26,37 @@ ws2 = wb.create_sheet("Статистика по городам", 1)
 
 
 def generate_excel():
+    """ Создает exel обьект
+    """
     wb.remove(wb['Sheet'])
     wb.save("report.xlsx")
 
-
-
-
 def clean(text):
+    """
+    очищает строку
+    :param text: исходная строка
+    :return: очищенная строка
+    """
     example = re.compile(r'<[^>]+>')
     s = example.sub('', text).replace(' ', ' ').replace('\xa0', ' ').strip()
     return re.sub(" +", " ", s)
 
 def csv_reader(name):
+    """
+
+    :param name: имя исходного файла
+    :return: возвращает, заголовки и данные
+    """
     csv_list = csv.reader(open(name, encoding='utf-8-sig'))
     data = [x for x in csv_list]
     return data[0], data[1::]
 
 def csv_filer(reader):
+    """
+    Проверяет данные
+    :param reader: ридер csv файла
+    :return: возвращает структурированные данные
+    """
     all_vac = [x for x in reader if '' not in x and len(x) == len(reader[0])]
     vac = [[clean(y) for y in x] for x in all_vac]
     return vac
@@ -109,6 +123,12 @@ for key in salary_city:
     salary_city[key] = sum(salary_city[key]) // len(salary_city[key])
 
 def set_cities(salaries, vacancies):
+    """
+    Устанавливает в таблицу все списки городов
+    :param salaries: список зарплат
+    :param vacancies: список вакансий
+    :return: ничего
+    """
     setCell(row=1, column=1, value="Город", ws=ws2,bold=True)
     setCell(row=1, column=2, value="Уровень зарплаты", ws=ws2,bold=True)
     setCell(row=1, column=3, value="Город", ws=ws2,bold=True)
@@ -125,6 +145,15 @@ def set_cities(salaries, vacancies):
         index+=1
 
 def setCell(row,column,value,ws, bold=False):
+    """
+    Устанавливает значение в таблицу применяя параметры
+    :param row: номер строки
+    :param column   номер столбца
+    :param value: значение ячейки
+    :param ws: ссылка на таблицу
+    :param bold: жирность текста
+    :return: ничего
+    """
     cell = ws.cell(row=row, column=column,value=value)
     cell.border = Border(top=thin, left=thin, right=thin, bottom=thin)
     if bold:
@@ -132,6 +161,14 @@ def setCell(row,column,value,ws, bold=False):
 
 
 def set_years(salary_dynamic, count_dynamic, salary_prof_dynamic , prof_count):
+    """
+    Устанавливает значение в таблицу применяя параметры
+    :param salary_dynamic: список зарплат
+    :param count_dynamic: список кол-ва
+    :param salary_prof_dynamic: список зарплат по професии
+    :param prof_count: список кол-ва по профессии
+    :return: ничего
+    """
     setCell(row=1,column=1,value="год",ws=ws1,bold=True)
     setCell(row=1,column=2,value="Средняя зарплата" ,ws=ws1,bold=True)
     setCell(row=1,column=3,value="Средняя зарплата " + prof ,ws=ws1,bold=True)
