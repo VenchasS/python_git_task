@@ -4,6 +4,10 @@ from collections import Counter
 from openpyxl import Workbook
 from openpyxl.styles import Border, Side, PatternFill, Font, GradientFill, Alignment
 
+from unittest import TestCase, main
+
+
+
 currency_to_rub = {
     "AZN": 35.68,
     "BYR": 23.91,
@@ -28,6 +32,9 @@ ws2 = wb.create_sheet("Статистика по городам", 1)
 def generate_excel():
     """ Создает exel обьект
     """
+    wb = Workbook()
+    ws1 = wb.create_sheet("Статистика по годам", 0)
+    ws2 = wb.create_sheet("Статистика по городам", 1)
     wb.remove(wb['Sheet'])
     wb.save("report.xlsx")
 
@@ -183,6 +190,10 @@ def set_years(salary_dynamic, count_dynamic, salary_prof_dynamic , prof_count):
         setCell(row=index, column=5, value=prof_count[key], ws=ws1)
         index+=1
 
+
+
+
+
 print('Динамика уровня зарплат по годам:', salary_dynamic)
 print('Динамика количества вакансий по годам:', count_dynamic)
 print('Динамика уровня зарплат по годам для выбранной профессии:', salary_prof_dynamic)
@@ -195,3 +206,32 @@ most = {k: v for k, v in most.items() if v >= 0.01}
 print('Доля вакансий по городам (в порядке убывания):', most)
 set_cities(salaries=dict(Counter(salary_city).most_common(10)), vacancies=most)
 generate_excel()
+
+class UnitTest(TestCase):
+
+    def test_clean(self):
+        self.assertEqual(clean("<p><strong>ОБЯЗАННОСТИ:</strong></p>"), "ОБЯЗАННОСТИ:")
+        self.assertEqual(clean("<p><strong>Cotvec </strong>- IT-компания, которая занимается консалтингом и разработкой программного обеспечения для организаций банковско-финансового сектора.</p>"),"Cotvec - IT-компания, которая занимается консалтингом и разработкой программного обеспечения для организаций банковско-финансового сектора.")
+
+    def test_csv_filer(self):
+        self.assertEqual(csv_filer([[
+            "test"
+        ]])[0][0], "test")
+
+    def test_setCell(self):
+        generate_excel()
+        row = 1
+        column = 1
+        value = 2289
+        setCell(row,column,value,ws1)
+        sell = ws1.cell(row=row, column=column)
+        self.assertEqual(value, sell.value)
+
+    def test_csv_reader(self):
+        self.assertEqual(header[0],"name")
+        self.assertEqual(header[1], "salary_from")
+        self.assertEqual(header[2], "salary_to")
+        pass
+
+if __name__ == '__main__':
+    main()
