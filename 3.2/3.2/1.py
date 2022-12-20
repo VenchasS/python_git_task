@@ -3,7 +3,6 @@ import os
 
 def csv_reader(name):
     """
-
     :param name: имя исходного файла
     :return: возвращает, заголовки и данные
     """
