@@ -13,7 +13,6 @@ def csv_reader(name):
 
 def make_chunks(vac, header):
     """
-
     :param vac: список вакансий
     :param header: заголовок
     :return: список с годами
