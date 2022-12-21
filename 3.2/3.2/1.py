@@ -16,8 +16,8 @@ def make_chunks(vac, header):
     :param header: заголовок
     :return: список с годами
     """
-    if not os.path.exists("files"):
-        os.makedirs("files")
+    if not os.path.exists("../files"):
+        os.makedirs("../files")
     chunks = []
     dict_naming = 0
     for i in range(len(header)):
@@ -25,7 +25,7 @@ def make_chunks(vac, header):
             dict_naming = i
     for row in vac:
         year = row[dict_naming].split('-')[0]
-        file = open(f'files/{year}.csv', 'a', encoding='utf-8-sig', newline='')
+        file = open(f'../files/{year}.csv', 'a', encoding='utf-8-sig', newline='')
         writer = csv.writer(file)
         if year not in chunks:
             writer.writerow(header)
