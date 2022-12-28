@@ -1,5 +1,11 @@
 # python_git_task
 
+# 3.3.1
+Были полученны данные результаты
+![Screenshot_1](https://user-images.githubusercontent.com/49115035/209783837-2da091c4-c8ca-4a89-9d58-27d29261bc94.png)
+![208434074-1d25aa2e-4b63-4d66-92ab-747215a5cdc8](https://user-images.githubusercontent.com/49115035/209783840-26e0f51d-bc5a-49a4-8076-543036521b50.png)
+
+
 # 3.2.1
 Были сгенерированны файлы с 2007 по 2022 год
 ![files](https://user-images.githubusercontent.com/49115035/208684476-669e63db-bee2-4214-87ae-04ebf627bd68.png)
