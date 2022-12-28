@@ -9,6 +9,9 @@
 Новые данные
 ![Screenshot_2](https://user-images.githubusercontent.com/49115035/209793309-5c474466-2f5a-4974-bf9c-5091d91a1966.png)
 
+# 3.3.3
+Полученные данные
+![Screenshot_3](https://user-images.githubusercontent.com/49115035/209800512-b45aafc3-9751-4505-98a3-4b268937aaa8.png)
 
 # 3.2.1
 Были сгенерированны файлы с 2007 по 2022 год
