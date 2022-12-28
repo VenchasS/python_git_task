@@ -1,5 +1,8 @@
 # python_git_task
 
+# 3.4.1
+![Screenshot_2](https://user-images.githubusercontent.com/49115035/209793309-5c474466-2f5a-4974-bf9c-5091d91a1966.png)
+
 # 3.3.1
 Были полученны данные результаты
 ![Screenshot_1](https://user-images.githubusercontent.com/49115035/209783837-2da091c4-c8ca-4a89-9d58-27d29261bc94.png)
