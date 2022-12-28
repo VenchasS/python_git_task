@@ -5,6 +5,10 @@
 ![Screenshot_1](https://user-images.githubusercontent.com/49115035/209783837-2da091c4-c8ca-4a89-9d58-27d29261bc94.png)
 ![208434074-1d25aa2e-4b63-4d66-92ab-747215a5cdc8](https://user-images.githubusercontent.com/49115035/209783840-26e0f51d-bc5a-49a4-8076-543036521b50.png)
 
+# 3.3.2 
+Новые данные
+![Screenshot_2](https://user-images.githubusercontent.com/49115035/209793309-5c474466-2f5a-4974-bf9c-5091d91a1966.png)
+
 
 # 3.2.1
 Были сгенерированны файлы с 2007 по 2022 год
