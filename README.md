@@ -1,5 +1,8 @@
 # python_git_task
 
+# 3.5.2
+![Screenshot_1](https://user-images.githubusercontent.com/49115035/210015104-c530926c-553e-4987-be59-4203cb11b5ed.png)
+
 # 3.4.1
 ![Screenshot_2](https://user-images.githubusercontent.com/49115035/209793309-5c474466-2f5a-4974-bf9c-5091d91a1966.png)
 
