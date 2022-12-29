@@ -17,7 +17,7 @@ class UserInput:
         # self.file_name = input('Введите название файла: ')
         # self.job_name = input('Введите название профессии: ')
 
-        self.file_name = 'vacancies_dif_currencies.csv'
+        self.file_name = '../3.4/vacancies_dif_currencies.csv'
         self.job_name = 'Аналитик'
 
 
@@ -54,7 +54,7 @@ def calc_year_stats_mp():
     global year_by_vac_num, year_by_salary, year_by_vac_num_job, year_by_salary_job, df_res
     process = []
     q = Queue()
-    currencies = pd.read_csv('currencies.csv')
+    currencies = pd.read_csv('../3.4/currencies.csv')
 
     p = Process(target=calc_year_stat_mp, args=(user_input.file_name, user_input.job_name, q, currencies.copy()))
     process.append(p)

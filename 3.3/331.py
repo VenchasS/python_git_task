@@ -2,7 +2,7 @@ import requests
 import pandas as pd
 
 pd.set_option('expand_frame_repr', False)
-df = pd.read_csv('vacancies_dif_currencies.csv')
+df = pd.read_csv('../3.4/vacancies_dif_currencies.csv')
 df['published'] = pd.to_datetime(df['published_at'], format='%Y-%m-%dT%H:%M:%S%z', utc=True)
 date_sort = df.sort_values(by='published').reset_index()
 months = list(date_sort.published.dt.strftime('%m/%Y').unique())
